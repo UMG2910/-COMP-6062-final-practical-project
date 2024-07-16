@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COMP-6062 Final Project</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Umang Mistry - 1154031</h1>
+        <section id="random-fact" class="mt-5">
+            <h2>Random Fact</h2>
+            <p id="fact"></p>
+            <button id="new-fact" class="btn btn-primary">New Fact</button>
+        </section>
+        <section id="weather" class="mt-5">
+            <h2>Weather</h2>
+            <input type="text" id="city" placeholder="Enter city name" class="form-control">
+            <button id="get-weather" class="btn btn-primary mt-2">Get Weather</button>
+            <p id="weather-info"></p>
+        </section>
+        <section id="dictionary" class="mt-5">
+            <h2>Dictionary</h2>
+            <input type="text" id="word" placeholder="Enter word" class="form-control">
+            <button id="define-word" class="btn btn-primary mt-2">Define</button>
+            <p id="definition-info"></p>
+        </section>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js"></script>
+    <script src="scripts/app.js"></script>
+</body>
+</html>
