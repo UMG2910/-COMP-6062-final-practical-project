@@ -1,28 +1,21 @@
 body {
-    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
 }
 
-h1 {
+header h1 {
     text-align: center;
+    margin: 20px 0;
+}
+
+h2 {
     margin-top: 20px;
+    margin-bottom: 10px;
 }
 
-.container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-.mt-5 {
-    margin-top: 20px;
-}
-
-#fact, #weather-info, #definition-info {
-    margin-top: 10px;
-}
-
-@media (max-width: 768px) {
-    .container {
-        padding: 10px;
+@media only screen and (max-width: 650px) {
+    body {
+        background-color: #000;
+        color: #fff;
+        font-family: "Comic Sans MS", "Comic Sans", cursive;
     }
 }
