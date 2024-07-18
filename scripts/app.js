@@ -1,54 +1,43 @@
 const app = Vue.createApp({
     data() {
         return {
-            weather: {
-                temperature: '',
-                wind: '',
-                description: ''
-            },
-            city: 'London, Ontario',
+            city: '',
             word: '',
-            dictionary: {
-                word: '',
-                phonetic: '',
-                partOfSpeech: '',
-                definition: ''
-            },
-            fact: ''
+            weather: null,
+            weatherCity: 'London, Ontario',
+            definition: null,
+            randomFact: null,
+            defaultCity: 'London, Ontario'
         };
+    },
+    methods: {
+        async getWeather() {
+            const cityName = this.city || this.defaultCity;
+            const response = await fetch(`https://goweather.herokuapp.com/weather/${cityName}`);
+            const data = await response.json();
+            this.weather = data;
+            this.weatherCity = cityName;
+        },
+        async getDefinition() {
+            const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${this.word}`);
+            const data = await response.json();
+            if (data.length > 0) {
+                this.definition = {
+                    word: data[0].word,
+                    phonetic: data[0].phonetic || 'N/A',
+                    partOfSpeech: data[0].meanings[0].partOfSpeech,
+                    definition: data[0].meanings[0].definitions[0].definition
+                };
+            }
+        },
+        async getRandomFact() {
+            const response = await fetch('https://uselessfacts.jsph.pl/api/v2/facts/random');
+            const data = await response.json();
+            this.randomFact = data.text;
+        }
     },
     created() {
         this.getWeather();
-        this.getRandomFact();
-    },
-    methods: {
-        getWeather() {
-            fetch(`https://goweather.herokuapp.com/weather/${this.city}`)
-                .then(response => response.json())
-                .then(data => {
-                    this.weather.temperature = data.temperature;
-                    this.weather.wind = data.wind;
-                    this.weather.description = data.description;
-                });
-        },
-        defineWord() {
-            fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${this.word}`)
-                .then(response => response.json())
-                .then(data => {
-                    const entry = data[0];
-                    this.dictionary.word = entry.word;
-                    this.dictionary.phonetic = entry.phonetics[0].text;
-                    this.dictionary.partOfSpeech = entry.meanings[0].partOfSpeech;
-                    this.dictionary.definition = entry.meanings[0].definitions[0].definition;
-                });
-        },
-        getRandomFact() {
-            fetch('https://uselessfacts.jsph.pl/api/v2/facts/random')
-                .then(response => response.json())
-                .then(data => {
-                    this.fact = data.text;
-                });
-        }
     }
 });
 

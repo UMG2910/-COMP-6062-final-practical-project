@@ -1,21 +1,23 @@
-body {
-    background-color: #f8f9fa;
-}
-
-header h1 {
+.box {
+    background-color: blue;
+    color: white;
+    min-height: 100px;
     text-align: center;
-    margin: 20px 0;
+    margin-bottom: 20px;
 }
 
-h2 {
-    margin-top: 20px;
-    margin-bottom: 10px;
+.box2 {
+    background-color: red;
+    color: white;
+    min-height: 100px;
+    text-align: center;
+    margin-bottom: 20px;
 }
 
 @media only screen and (max-width: 650px) {
     body {
         background-color: #000;
-        color: #fff;
+        color: #FFF;
         font-family: "Comic Sans MS", "Comic Sans", cursive;
     }
 }
