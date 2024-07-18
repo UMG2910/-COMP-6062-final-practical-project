@@ -1,23 +1,31 @@
-.box {
-    background-color: blue;
+body {
+    background-image: url('D:/ESD3/sem 4/comp 6062 web development/Final Project/-COMP-6062-final-practical-project/newspaper.jpg');
+    background-size: cover;
     color: white;
+}
+h1{
+    color: rgb(179, 220, 42);
+    background-color: beige;
+}
+
+.box {
+    background-color: rgba(0, 0, 255, 0.7);
     min-height: 100px;
     text-align: center;
-    margin-bottom: 20px;
+    padding: 10px;
 }
 
 .box2 {
-    background-color: red;
-    color: white;
+    background-color: rgba(255, 0, 0, 0.7);
     min-height: 100px;
     text-align: center;
-    margin-bottom: 20px;
+    padding: 10px;
 }
 
 @media only screen and (max-width: 650px) {
     body {
-        background-color: #000;
-        color: #FFF;
+        background-color: orange;
+        color: #fff;
         font-family: "Comic Sans MS", "Comic Sans", cursive;
     }
 }

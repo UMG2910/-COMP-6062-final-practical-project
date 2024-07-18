@@ -3,41 +3,55 @@ const app = Vue.createApp({
         return {
             city: '',
             word: '',
-            weather: null,
-            weatherCity: 'London, Ontario',
-            definition: null,
-            randomFact: null,
-            defaultCity: 'London, Ontario'
+            weather: {
+                city: 'London, Ontario',
+                temperature: '',
+                wind: '',
+                description: ''
+            },
+            dictionary: {
+                word: '',
+                phonetic: '',
+                partOfSpeech: '',
+                definition: ''
+            },
+            randomFact: ''
         };
     },
     methods: {
-        async getWeather() {
-            const cityName = this.city || this.defaultCity;
-            const response = await fetch(`https://goweather.herokuapp.com/weather/${cityName}`);
-            const data = await response.json();
-            this.weather = data;
-            this.weatherCity = cityName;
+        getWeather() {
+            const cityName = this.city.trim() || 'London Ontario';
+            fetch(`https://goweather.herokuapp.com/weather/${cityName}`)
+                .then(response => response.json())
+                .then(data => {
+                    this.weather.city = cityName.replace('%20', ' ');
+                    this.weather.temperature = data.temperature;
+                    this.weather.wind = data.wind;
+                    this.weather.description = data.description;
+                });
         },
-        async getDefinition() {
-            const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${this.word}`);
-            const data = await response.json();
-            if (data.length > 0) {
-                this.definition = {
-                    word: data[0].word,
-                    phonetic: data[0].phonetic || 'N/A',
-                    partOfSpeech: data[0].meanings[0].partOfSpeech,
-                    definition: data[0].meanings[0].definitions[0].definition
-                };
-            }
+        defineWord() {
+            fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${this.word}`)
+                .then(response => response.json())
+                .then(data => {
+                    const wordData = data[0];
+                    this.dictionary.word = wordData.word;
+                    this.dictionary.phonetic = wordData.phonetic;
+                    this.dictionary.partOfSpeech = wordData.meanings[0].partOfSpeech;
+                    this.dictionary.definition = wordData.meanings[0].definitions[0].definition;
+                });
         },
-        async getRandomFact() {
-            const response = await fetch('https://uselessfacts.jsph.pl/api/v2/facts/random');
-            const data = await response.json();
-            this.randomFact = data.text;
+        getRandomFact() {
+            fetch('https://uselessfacts.jsph.pl/api/v2/facts/random')
+                .then(response => response.json())
+                .then(data => {
+                    this.randomFact = data.text;
+                });
         }
     },
-    created() {
+    mounted() {
         this.getWeather();
+        this.getRandomFact();
     }
 });
 
