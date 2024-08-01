@@ -14,7 +14,7 @@
         <div class="row">
             <div class="col-12 box mb-3">
                 <h2>Weather</h2>
-                <input type="text" v-model="city" placeholder="Enter city name">
+                <input type="text" v-model="city" id="city" placeholder="Enter city name">
                 <button @click="getWeather">Get Weather</button>
                 <p>City: {{ weather.city }}</p>
                 <p>Temperature: {{ weather.temperature }}</p>
@@ -25,7 +25,7 @@
         <div class="row">
             <div class="col-md-6 box mb-3">
                 <h2>Dictionary</h2>
-                <input type="text" v-model="word" placeholder="Enter a word">
+                <input type="text" v-model="word" id="word" placeholder="Enter a word">
                 <button @click="defineWord">Define</button>
                 <p>Word: {{ dictionary.word }}</p>
                 <p>Phonetic: {{ dictionary.phonetic }}</p>
